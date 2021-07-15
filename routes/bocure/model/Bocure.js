@@ -18,7 +18,7 @@ let bocureSchema = new mongoose.Schema({
     },
     link:{
         type:String
-    },
+    }
 })
 
 module.exports = mongoose.model("bocure", bocureSchema)

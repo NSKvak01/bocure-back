@@ -2,6 +2,7 @@ const ErrorMessageHandlerClass = require("./ErrorMessageHandlerClass");
 
 function dispatchErrorDevelopment (error,req,res){
     if(req.originalUrl.startsWith('/api')){
+        console.log(req)
         return res.status(error.statusCode).json({
             status:error.status,
             error:error,
@@ -11,7 +12,7 @@ function dispatchErrorDevelopment (error,req,res){
     }
 }
 function dispatchErrorProduction (error,req,res){
-    if (req.originalUrl.startWith("/api")){
+    if (req.originalUrl.startsWith("/api")){
         if(error.isOperational){
             return res.status(error.statusCode).json({
                 status:error.status,
