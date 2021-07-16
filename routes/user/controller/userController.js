@@ -47,7 +47,7 @@ async function login(req,res,next){
                     expiresIn:"100d"
                 }
                 )
-            res.json({message:"Success login "})
+            res.json({message:"Success login", payload:jwtToken})
         }
         }
     } catch (e) {
