@@ -1,5 +1,26 @@
 let Bocure = require("../model/Bocure")
 let User = require("../../user/model/User")
+let axios = require("axios")
+
+const getBocuresFromAPI = async(req,res)=>{
+    try {
+        let bocure = await handleBocureSearch(req.query.type, req.query.maxprice, req.query.participants)
+        res.json(bocure.data)
+    } catch (error) {
+        res.status(500).json({error:error, message:error.message})
+    }
+}
+
+const handleBocureSearch = async (type, maxprice, participants) => {
+    try {
+        let randomBocure = await axios.get(
+            `https://www.boredapi.com/api/activity?minprice=0&maxprice=${maxprice}&type=${type}&participants=${participants}`
+        );
+        return randomBocure;
+    } catch (e) {
+        return e;
+    }
+};
 
 
 const getAllBocures = async(req,res)=>{
@@ -62,5 +83,6 @@ const deleteBocure = async (req,res)=>{
 module.exports = {
     getAllBocures,
     addBocure,
-    deleteBocure
+    deleteBocure,
+    getBocuresFromAPI
 }
