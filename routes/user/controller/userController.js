@@ -26,30 +26,45 @@ async function signup(req,res, next){
 }
 
 async function login(req,res,next){
-    const {email, password} = req.body
+    const {emailUsername, password} = req.body
     let {errorObj} = res.locals
     if(Object.keys(errorObj).length>0){
         return res.status(500).json({message:"failure", payload:errorObj})    
     } 
     try {
-        let foundUser = await User.findOne({email:email})
+        let foundUser = await User.findOne({email:emailUsername})
         if(!foundUser){
-            res.status(400).json({message:"error", payload:"Check your email and password"})
+            let foundUser1 = await User.findOne({username:emailUsername})
+            if(!foundUser1){
+                res.status(400).json({message:"error", payload:"Check your email and password"})
+            } else {
+                let comparedPassword = await bcrypt.compare(password, foundUser1.password)
+                if(!comparedPassword){
+                    res.status(400).json({message:"error", payload:"Check your email and password"})
+                } else {
+                    let jwtToken = jwt.sign({username:foundUser1.username},
+                        process.env.PRIVATE_JWT_KEY,
+                        {
+                            expiresIn:"100d"
+                        }
+                        )
+                    res.json({message:"Success login", payload:jwtToken})
+                }
+            }
         } else{
             let comparedPassword = await bcrypt.compare(password, foundUser.password)
-    
-        if(!comparedPassword){
-            res.status(400).json({message:"error", payload:"Check your email and password"})
-        } else {
-            let jwtToken = jwt.sign({email:foundUser.email},
-                process.env.PRIVATE_JWT_KEY,
-                {
-                    expiresIn:"100d"
-                }
-                )
-            res.json({message:"Success login", payload:jwtToken})
+            if(!comparedPassword){
+                res.status(400).json({message:"error", payload:"Check your email and password"})
+            } else {
+                let jwtToken = jwt.sign({username:foundUser.username},
+                    process.env.PRIVATE_JWT_KEY,
+                    {
+                        expiresIn:"100d"
+                    }
+                    )
+                res.json({message:"Success login", payload:jwtToken})
         }
-        }
+    }
     } catch (e) {
         next(e)
     }
