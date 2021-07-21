@@ -10,7 +10,16 @@ const getBocuresFromAPI = async(req,res)=>{
         res.status(500).json({error:error, message:error.message})
     }
 }
-
+const getBocureByKey = async(req,res)=>{
+    try {
+        let bocure =await axios.get(
+            `https://www.boredapi.com/api/activity?key=${req.query.key}`
+        );
+        res.json(bocure.data)
+    } catch (error) {
+        res.status(500).json({error:error, message:error.message})
+    }
+}
 const handleBocureSearch = async (type, maxprice, participants) => {
     try {
         let randomBocure = await axios.get(
@@ -84,5 +93,6 @@ module.exports = {
     getAllBocures,
     addBocure,
     deleteBocure,
-    getBocuresFromAPI
+    getBocuresFromAPI,
+    getBocureByKey
 }
