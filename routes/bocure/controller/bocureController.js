@@ -35,7 +35,7 @@ const handleBocureSearch = async (type, maxprice, participants) => {
 const getAllBocures = async(req,res)=>{
     try {
         const {decodedJwt} = res.locals
-        let payload = await User.findOne({email:decodedJwt.email})
+        let payload = await User.findOne({username:decodedJwt.username})
             .populate({
                 path:"bocures",
                 model:Bocure,
@@ -49,8 +49,9 @@ const getAllBocures = async(req,res)=>{
 }
 
 const addBocure = async(req,res)=>{
+    const {decodedJwt} = res.locals
+    console.log(decodedJwt)
     try {
-        const {decodedJwt} = res.locals
         const {activity, accessibility, type, participants, price, link} = req.body
         const newBocure = new Bocure({
             activity, 
@@ -61,7 +62,7 @@ const addBocure = async(req,res)=>{
             link
         })
         const savedBocure = await newBocure.save()
-        const foundUser = await User.findOne({email:decodedJwt.email})
+        const foundUser = await User.findOne({username:decodedJwt.username})
         foundUser.bocures.push(savedBocure._id)
         await foundUser.save()
         res.json(savedBocure)
@@ -74,7 +75,7 @@ const deleteBocure = async (req,res)=>{
     try {
         let {decodedJwt} = res.locals
         let deletedBocure = await Bocure.findByIdAndDelete(req.params.id)
-        let foundUser = await User.findOne({email:decodedJwt.email})
+        let foundUser = await User.findOne({username:decodedJwt.username})
         filteredBocures = foundUser.bocures.filter((item)=>{
             if(item._id.toString()!== req.params.id){
                 return item
