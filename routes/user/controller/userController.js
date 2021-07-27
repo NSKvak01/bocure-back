@@ -105,9 +105,19 @@ async function updateUser(req, res, next) {
         }
       }
 
+      async function deleteUser(req,res,next){
+          try {
+            let deletedUser= await User.findOneAndDelete({username:res.locals.decodedJwt.username})
+            res.json({message:"success", payload:deletedUser})
+          } catch (error) {
+            next(e);
+          }
+      }
+
 module.exports={
 signup,
 login,
 updateUser,
-fetchUserInfo
+fetchUserInfo,
+deleteUser
 }
