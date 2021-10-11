@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const jwtMiddleware = require ("../utils/jwtMiddleware")
-const {signup, login, updateUser, fetchUserInfo, deleteUser } = require("./controller/userController")
+const {signup, login} = require("./controller/userController")
 const checkIsEmpty = require("./helpers/checkIsEmpty")
 const checkIsUndefined = require("./helpers/checkIsUndefined")
 const checkIsStrongPassword = require("./helpers/checkIsStrongPassword")
@@ -26,9 +25,5 @@ router.post(
   checkIsEmpty, 
   login
 )
-
-router.put("/update-user-profile", jwtMiddleware, updateUser);
-router.get("/get-user-info", jwtMiddleware, fetchUserInfo)
-router.delete("/delete-user", jwtMiddleware, deleteUser)
 
 module.exports = router;

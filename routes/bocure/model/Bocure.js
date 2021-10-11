@@ -5,7 +5,7 @@ let bocureSchema = new mongoose.Schema({
         type:String
     },
     accessibility:{
-        type:String
+        type:Number
     },
     type:{
         type:String
