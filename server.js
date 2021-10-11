@@ -7,7 +7,7 @@ const port = 8080
 
 // connect our database to port 
 mongoose
-    .connect("mongodb://localhost:27017/bocure-backend", {
+    .connect(process.env.MONGODB_URI, {
         // need to use these, otherwise mongodb will give errors
         useNewUrlParser:true,
         useUnifiedTopology: true

@@ -71,7 +71,53 @@ async function login(req,res,next){
 
 }
 
+async function updateUser(req, res, next) {
+    try {
+        if(req.body.password){
+            let salt = await bcrypt.genSalt(10)
+            let hashedPassword = await bcrypt.hash(req.body.password, salt)
+            req.body.password = hashedPassword
+        }
+
+        let updatedUser = await User.findOneAndUpdate(
+            { username: res.locals.decodedJwt.username },
+            req.body,
+            { new: true }
+        );
+        if (req.body.password || req.body.username!==res.locals.decodedJwt.username ) {
+            res.status(202).json({ message: "success", payload: updatedUser });
+        } else {
+            res.json({ message: "success", payload: updatedUser });
+        }
+    } catch (e) {
+        next(e);
+    }
+}
+
+    async function fetchUserInfo(req, res, next) {
+        try {
+            let userInfo = await User.findOne({ username: res.locals.decodedJwt.username}).select(
+                "-password -__v -bocures -_id"
+            );
+            res.json({ message: "success", payload: userInfo });
+            } catch (e) {
+            next(e);
+            }
+        }
+
+        async function deleteUser(req,res,next){
+            try {
+                let deletedUser= await User.findOneAndDelete({username:res.locals.decodedJwt.username})
+                res.json({message:"success", payload:deletedUser})
+            } catch (error) {
+                next(e);
+            }
+        }
+
 module.exports={
 signup,
-login
+login,
+updateUser,
+fetchUserInfo,
+deleteUser
 }
