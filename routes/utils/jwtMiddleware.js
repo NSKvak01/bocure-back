@@ -6,7 +6,7 @@ async function checkJwtToken(req,res,next){
             let jwtToken = req.headers.authorization.slice(7)
             let decodedJwt = jwt.verify(jwtToken, process.env.PRIVATE_JWT_KEY)
             res.locals.decodedJwt = decodedJwt
-            next()
+            next() 
         } else{
             throw{message:"You don't have permission"}
         }
