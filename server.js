@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const app = require('./app')
 
 // define port
-const port = process.env.PORT
+const port = 8080
 
 // connect our database to port 
 mongoose
