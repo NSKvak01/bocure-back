@@ -27,6 +27,6 @@ app.all("*", function (req,res, next){
   ))
 })
 
-app.use(errorController)
+
 
 module.exports = app;
