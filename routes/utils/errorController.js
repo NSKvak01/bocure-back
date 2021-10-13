@@ -16,6 +16,7 @@ function dispatchErrorProduction (error,req,res){
         if(error.isOperational){
             return res.status(error.statusCode).json({
                 status:error.status,
+                error:error,
                 message:error.message
             })
         }
