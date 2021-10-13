@@ -4,7 +4,7 @@ const smtpTransport = require("nodemailer-smtp-transport")
 CLIENT_ID="22212146535-lfca68h6mag0ssvi14g9qadf2cj5i9bo.apps.googleusercontent.com"
 CLIENT_SECRET="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"
 REDIRECT_URI="https://developers.google.com/oauthplayground"
-REFRESH_TOKEN="1//04ZsGBvRvTjv5CgYIARAAGAQSNwF-L9IrT-s2RnSMozshxgxFOXRoCran4Au3uakvmq2NG0h62NiOuOYzhHo7WKQyXmjSehBORus"
+REFRESH_TOKEN="1//04hSLewYDuSsTCgYIARAAGAQSNwF-L9IrIAdMS6tbKdlLOCeGIt1ouq3c3ef0loRVyS5h6tcIWvdoQLqbldugFDeu_rt64wgpoOU"
 
 const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
 oAuth2Client.setCredentials({refresh_token: REFRESH_TOKEN})
@@ -22,6 +22,13 @@ var transporter = nodemailer.createTransport({
     accessToken: accessToken
     }
   });
+// var transporter = nodemailer.createTransport(smtpTransport({
+//   service:"gmail",
+//   auth: {
+//     user: process.env.email,
+//     pass:process.env.password
+//     }
+//   }));
 
 
 module.exports = transporter;
