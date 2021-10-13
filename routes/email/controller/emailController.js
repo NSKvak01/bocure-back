@@ -8,18 +8,18 @@ REFRESH_TOKEN="1//04ZsGBvRvTjv5CgYIARAAGAQSNwF-L9IrT-s2RnSMozshxgxFOXRoCran4Au3u
 
 const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
 oAuth2Client.setCredentials({refresh_token: REFRESH_TOKEN})
-const accessToken = oAuth2Client.getAccessToken()
+// const accessToken = oAuth2Client.getAccessToken()
 
 var transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
-  port:465,
+  service:"gmail",
   auth: {
     type: 'OAuth2',
     user: process.env.email,
     clientID: CLIENT_ID,
     clientSecret:CLIENT_SECRET,
     refreshToken: REFRESH_TOKEN,
-    accessToken: accessToken
+    accessToken: "ya29.a0ARrdaM-OkC4RJdimjRg0VmI_DMkb2ttpVJt5Z9zTIQ_RYss2az7KxjPywdven9Cg9vJtMVbScthT9Mi_9LcJvF13vWlIUpOokCpaqLGoQskyYkVimlJV3VcvWUBHlpL6LCHMh5Pwi30AydLNkXM6AgD3j5c-"
     }
   });
 
