@@ -16,7 +16,7 @@ var transporter = nodemailer.createTransport({
   auth: {
     type: 'OAuth2',
     user: process.env.email,
-    clientID: CLIENT_ID,
+    clientId: CLIENT_ID,
     clientSecret:CLIENT_SECRET,
     refreshToken: REFRESH_TOKEN,
     accessToken: accessToken
