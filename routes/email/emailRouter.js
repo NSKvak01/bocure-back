@@ -21,9 +21,9 @@ router.post('/send', (req, res) => {
             <h2 style="color:black;">Message: ${req.body.message}</h2>
           </div>
           <div style="display:flex; justify-content:flex-end; margin-top:20px">
-          <a href="http://localhost:3000/yes" style="font-size:18px;background-color:rgb(116, 116, 249); color:white; margin-left:10px; margin-right:10px; text-decoration:none;border-radius:8px;border:1px solid rgb(91, 91, 249);width:80px;padding:5px;text-align:center">Yes</a>
-          <a href="http://localhost:3000/maybe" style="font-size:18px; background-color:rgb(116, 116, 249); color:white; margin-left:10px; margin-right:10px; text-decoration:none;border-radius:8px;border:1px solid rgb(91, 91, 249);width:80px;padding:5px; text-align:center">Maybe</a>
-          <a href="http://localhost:3000/no" style="font-size:18px; background-color:rgb(116, 116, 249);color:white;  margin-left:10px; text-decoration:none;border-radius:8px;border:1px solid rgb(91, 91, 249);width:80px; padding:5px;text-align:center">No</a>
+          <a href="https://bocure.kvaknastya.com/yes" style="font-size:18px;background-color:rgb(116, 116, 249); color:white; margin-left:10px; margin-right:10px; text-decoration:none;border-radius:8px;border:1px solid rgb(91, 91, 249);width:80px;padding:5px;text-align:center">Yes</a>
+          <a href="https://bocure.kvaknastya.com/maybe" style="font-size:18px; background-color:rgb(116, 116, 249); color:white; margin-left:10px; margin-right:10px; text-decoration:none;border-radius:8px;border:1px solid rgb(91, 91, 249);width:80px;padding:5px; text-align:center">Maybe</a>
+          <a href="https://bocure.kvaknastya.com/no" style="font-size:18px; background-color:rgb(116, 116, 249);color:white;  margin-left:10px; text-decoration:none;border-radius:8px;border:1px solid rgb(91, 91, 249);width:80px; padding:5px;text-align:center">No</a>
           </div>
         `
       };
